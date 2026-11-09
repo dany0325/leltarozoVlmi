@@ -78,3 +78,21 @@ input, select {
   width: 100%;
 }
 
+/* Statisztika */
+.statisztika {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.statisztika div {
+  background: var(--felulet);
+  border: 1px solid var(--vonal);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.statisztika strong { display: block; font-size: 1.8rem; }
+.statisztika span { color: var(--halvany); }
+
