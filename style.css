@@ -1,0 +1,80 @@
+:root {
+  --hatter: #f4f5f2;
+  --felulet: #ffffff;
+  --szoveg: #1d2b2a;
+  --halvany: #5d6b69;
+  --vonal: #d9dedb;
+  --fo: #1f6f6b;
+  --fo-szoveg: #ffffff;
+  --fo-hover: #164f4c;
+  --fo-halvany: #e3f0ef;
+  --sor-hover: #eef5f4;
+  --zold: #2e7d32;
+  --zold-hatter: #e3f2e4;
+  --sarga: #8a5a00;
+  --sarga-hatter: #fdf0d2;
+  --piros: #b3261e;
+  --piros-hatter: #fbe3e1;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--hatter);
+  color: var(--szoveg);
+  line-height: 1.5;
+}
+
+.fejlec {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--vonal);
+  background: var(--felulet);
+}
+
+.fejlec h1 { margin: 0; font-size: 1.6rem; }
+.fejlec p { margin: 2px 0 0; color: var(--halvany); }
+.fejlec-gombok { display: flex; flex-wrap: wrap; gap: 8px; }
+
+main { max-width: 1100px; margin: 0 auto; padding: 24px; }
+
+button, .gomb {
+  font: inherit;
+  padding: 8px 14px;
+  border: 1px solid var(--fo);
+  border-radius: 6px;
+  background: var(--fo);
+  color: var(--fo-szoveg);
+  cursor: pointer;
+  display: inline-block;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+
+button.masodlagos, .gomb.masodlagos {
+  background: transparent;
+  color: var(--fo);
+}
+
+button.veszelyes { border-color: var(--piros); color: var(--piros); background: transparent; }
+
+button:focus-visible, input:focus-visible, select:focus-visible, .gomb:focus-visible {
+  outline: 3px solid var(--fo);
+  outline-offset: 2px;
+}
+
+input, select {
+  font: inherit;
+  padding: 8px 10px;
+  border: 1px solid var(--vonal);
+  border-radius: 6px;
+  background: var(--felulet);
+  color: var(--szoveg);
+  width: 100%;
+}
+
