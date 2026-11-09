@@ -78,3 +78,21 @@
     </form>
   </dialog>
 
+  <!-- Kiadás -->
+  <dialog id="kiadasAblak">
+    <form id="kiadasUrlap" novalidate>
+      <h2 id="kiadasCim">Eszköz kiadása</h2>
+      <label>Ki viszi el?
+        <input type="text" id="kinekMezo" placeholder="pl. Kovács Anna">
+      </label>
+      <label>Visszahozási határidő
+        <input type="date" id="hataridoMezo">
+      </label>
+      <p class="hiba" id="kiadasHiba" role="alert"></p>
+      <div class="ablak-gombok">
+        <button type="button" class="masodlagos" data-bezar="kiadasAblak">Mégse</button>
+        <button type="submit">Kiadás rögzítése</button>
+      </div>
+    </form>
+  </dialog>
+
