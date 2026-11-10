@@ -152,3 +152,38 @@ dialog input, dialog select { margin-top: 4px; font-weight: 400; }
 .ablak-gombok { display: flex; justify-content: flex-end; gap: 8px; }
 #elozmenyLista { padding-left: 20px; }
 
+/* Hover visszajelzés (csak egérrel, hogy érintőképernyőn ne ragadjon be) */
+@media (hover: hover) {
+  button:hover {
+    background: var(--fo-hover);
+    border-color: var(--fo-hover);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  }
+
+  button.masodlagos:hover {
+    background: var(--fo-halvany);
+    color: var(--fo-hover);
+  }
+
+  button.veszelyes:hover {
+    background: var(--piros-hatter);
+    border-color: var(--piros);
+    color: var(--piros);
+  }
+
+  input:hover, select:hover { border-color: var(--fo); }
+
+  tbody tr:hover { background: var(--sor-hover); }
+  tbody tr.lejart:hover { background: #f6cfcb; }
+
+  .statisztika div:hover {
+    border-color: var(--fo);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  }
+}
+
+button:active { transform: translateY(1px); box-shadow: none; }
+input:focus, select:focus { border-color: var(--fo); }
+tbody tr { transition: background 0.15s; }
+.statisztika div { transition: border-color 0.15s, box-shadow 0.15s; }
+
