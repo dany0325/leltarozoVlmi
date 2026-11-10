@@ -36,3 +36,33 @@ function mentes() {
   localStorage.setItem(KULCS, JSON.stringify(eszkozok));
 }
 
+// ---------- Segédfüggvények ----------
+function ma() {
+  return new Date().toISOString().slice(0, 10);
+}
+
+function biztonsagos(szoveg) {
+  return String(szoveg)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function eszkozKeresese(azonosito) {
+  for (var i = 0; i < eszkozok.length; i++) {
+    if (eszkozok[i].azonosito === azonosito) {
+      return eszkozok[i];
+    }
+  }
+  return null;
+}
+
+function lejartE(eszkoz) {
+  return eszkoz.allapot === "kiadva" && eszkoz.hatarido !== "" && eszkoz.hatarido < ma();
+}
+
+function elem(id) {
+  return document.getElementById(id);
+}
+
