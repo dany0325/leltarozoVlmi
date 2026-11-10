@@ -118,3 +118,19 @@ td.muveletek button { padding: 4px 10px; font-size: 0.85rem; margin: 0 4px 4px 0
 
 .ures { text-align: center; color: var(--halvany); padding: 24px; }
 
+/* Állapotjelzés */
+.jelzo {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.jelzo.elerheto { background: var(--zold-hatter); color: var(--zold); }
+.jelzo.kiadva { background: var(--sarga-hatter); color: var(--sarga); }
+.jelzo.hibas { background: var(--piros-hatter); color: var(--piros); }
+
+tr.lejart { background: var(--piros-hatter); }
+.lejart-szoveg { color: var(--piros); font-weight: 600; }
+
