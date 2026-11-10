@@ -170,3 +170,24 @@ function mindentFrissit() {
   tablaRajzolas();
 }
 
+// ---------- Hozzáadás és szerkesztés ----------
+function ujEszkozAblak() {
+  szerkesztettId = null;
+  elem("eszkozCim").textContent = "Új eszköz";
+  elem("eszkozUrlap").reset();
+  elem("eszkozHiba").textContent = "";
+  elem("eszkozAblak").showModal();
+}
+
+function szerkesztesAblak(azonosito) {
+  var e = eszkozKeresese(azonosito);
+  szerkesztettId = azonosito;
+  elem("eszkozCim").textContent = "Eszköz szerkesztése";
+  elem("azonositoMezo").value = e.azonosito;
+  elem("nevMezo").value = e.nev;
+  elem("kategoriaMezo").value = e.kategoria;
+  elem("allapotMezo").value = e.allapot;
+  elem("eszkozHiba").textContent = "";
+  elem("eszkozAblak").showModal();
+}
+
