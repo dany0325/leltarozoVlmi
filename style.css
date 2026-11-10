@@ -187,3 +187,48 @@ input:focus, select:focus { border-color: var(--fo); }
 tbody tr { transition: background 0.15s; }
 .statisztika div { transition: border-color 0.15s, box-shadow 0.15s; }
 
+/* Tablet és telefon: a táblázat kártyákká alakul */
+@media (max-width: 900px) {
+  .szuro { grid-template-columns: 1fr 1fr; }
+  .szuro input[type="search"] { grid-column: 1 / -1; }
+
+  table { border: none; background: transparent; }
+  table, thead, tbody, tr, td { display: block; }
+  thead { display: none; }
+
+  tbody tr {
+    margin-bottom: 12px;
+    padding: 8px 0;
+    background: var(--felulet);
+    border: 1px solid var(--vonal);
+    border-radius: 8px;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 4px 14px;
+    border: none;
+    text-align: right;
+  }
+
+  td::before {
+    content: attr(data-cimke);
+    font-weight: 600;
+    color: var(--halvany);
+    text-align: left;
+    flex-shrink: 0;
+  }
+
+  td.muveletek {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    padding: 12px 14px 6px;
+  }
+
+  td.muveletek::before { content: none; }
+  td.muveletek button { margin: 0; padding: 10px; min-height: 44px; font-size: 0.95rem; }
+}
+
