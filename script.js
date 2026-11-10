@@ -191,3 +191,52 @@ function szerkesztesAblak(azonosito) {
   elem("eszkozAblak").showModal();
 }
 
+function eszkozMentese(esemeny) {
+  esemeny.preventDefault();
+
+  var azonosito = elem("azonositoMezo").value.trim();
+  var nev = elem("nevMezo").value.trim();
+  var kategoria = elem("kategoriaMezo").value.trim();
+  var allapot = elem("allapotMezo").value;
+  var hiba = elem("eszkozHiba");
+
+  if (azonosito === "" || nev === "" || kategoria === "") {
+    hiba.textContent = "Az azonosító, a név és a kategória kötelező.";
+    return;
+  }
+
+  var masik = eszkozKeresese(azonosito);
+  if (masik !== null && azonosito !== szerkesztettId) {
+    hiba.textContent = "Ez az azonosító már létezik: " + azonosito;
+    return;
+  }
+
+  if (szerkesztettId === null) {
+    if (allapot === "kiadva") {
+      hiba.textContent = "Új eszköz nem lehet kiadva. Vedd fel elérhetőként, és használd a Kiadás gombot.";
+      return;
+    }
+    eszkozok.push({ azonosito: azonosito, nev: nev, kategoria: kategoria, allapot: allapot, kinel: "", hatarido: "", elozmenyek: [] });
+  } else {
+    var e = eszkozKeresese(szerkesztettId);
+    if (allapot === "kiadva" && e.kinel === "") {
+      hiba.textContent = "Kiadáshoz használd a Kiadás gombot.";
+      return;
+    }
+    if (allapot !== "kiadva" && e.allapot === "kiadva") {
+      // kiadott eszköz állapotát átírták: a kölcsönzés lezárul
+      lezarElozmeny(e);
+      e.kinel = "";
+      e.hatarido = "";
+    }
+    e.azonosito = azonosito;
+    e.nev = nev;
+    e.kategoria = kategoria;
+    e.allapot = allapot;
+  }
+
+  mentes();
+  elem("eszkozAblak").close();
+  mindentFrissit();
+}
+
