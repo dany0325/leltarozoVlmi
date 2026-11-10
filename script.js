@@ -125,3 +125,48 @@ function tablaRajzolas() {
   elem("uresUzenet").hidden = lista.length > 0;
 }
 
+function statisztikaRajzolas() {
+  var kint = 0;
+  var lejart = 0;
+  var hibas = 0;
+
+  for (var i = 0; i < eszkozok.length; i++) {
+    if (eszkozok[i].allapot === "kiadva") kint++;
+    if (eszkozok[i].allapot === "hibas") hibas++;
+    if (lejartE(eszkozok[i])) lejart++;
+  }
+
+  elem("statisztika").innerHTML =
+    "<div><strong>" + eszkozok.length + "</strong><span>Összes eszköz</span></div>" +
+    "<div><strong>" + kint + "</strong><span>Kint van</span></div>" +
+    "<div><strong>" + lejart + "</strong><span>Lejárt kölcsönzés</span></div>" +
+    "<div><strong>" + hibas + "</strong><span>Hibás</span></div>";
+}
+
+function kategoriakFrissitese() {
+  var kategoriak = [];
+  for (var i = 0; i < eszkozok.length; i++) {
+    if (kategoriak.indexOf(eszkozok[i].kategoria) === -1) {
+      kategoriak.push(eszkozok[i].kategoria);
+    }
+  }
+
+  var elozo = elem("kategoriaSzuro").value;
+  var szuroHtml = '<option value="">Minden kategória</option>';
+  var listaHtml = "";
+  for (var j = 0; j < kategoriak.length; j++) {
+    var k = biztonsagos(kategoriak[j]);
+    szuroHtml += '<option value="' + k + '">' + k + "</option>";
+    listaHtml += '<option value="' + k + '">';
+  }
+  elem("kategoriaSzuro").innerHTML = szuroHtml;
+  elem("kategoriaSzuro").value = elozo;
+  elem("kategoriaLista").innerHTML = listaHtml;
+}
+
+function mindentFrissit() {
+  kategoriakFrissitese();
+  statisztikaRajzolas();
+  tablaRajzolas();
+}
+
