@@ -266,3 +266,8 @@ tbody tr { transition: background 0.15s; }
   .ablak-gombok button { width: 100%; }
 }
 
+/* Nagyon keskeny telefonok */
+@media (max-width: 360px) {
+  td.muveletek { grid-template-columns: 1fr; }
+  .statisztika { grid-template-columns: 1fr; }
+}
