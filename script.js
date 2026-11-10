@@ -66,3 +66,62 @@ function elem(id) {
   return document.getElementById(id);
 }
 
+// ---------- Megjelenítés ----------
+function szurtLista() {
+  var kereses = elem("kereses").value.toLowerCase();
+  var kategoria = elem("kategoriaSzuro").value;
+  var allapot = elem("allapotSzuro").value;
+  var talalatok = [];
+
+  for (var i = 0; i < eszkozok.length; i++) {
+    var e = eszkozok[i];
+    var szoveg = (e.nev + " " + e.azonosito + " " + e.kinel).toLowerCase();
+
+    if (kereses !== "" && szoveg.indexOf(kereses) === -1) continue;
+    if (kategoria !== "" && e.kategoria !== kategoria) continue;
+    if (allapot === "lejart" && !lejartE(e)) continue;
+    if (allapot !== "" && allapot !== "lejart" && e.allapot !== allapot) continue;
+
+    talalatok.push(e);
+  }
+  return talalatok;
+}
+
+function tablaRajzolas() {
+  var lista = szurtLista();
+  var html = "";
+
+  for (var i = 0; i < lista.length; i++) {
+    var e = lista[i];
+    var id = biztonsagos(e.azonosito);
+    var lejart = lejartE(e);
+    var hatarido = e.hatarido === "" ? "-" : biztonsagos(e.hatarido);
+    if (lejart) {
+      hatarido = '<span class="lejart-szoveg">' + hatarido + " (lejárt)</span>";
+    }
+
+    var kiadasGomb = "";
+    if (e.allapot === "kiadva") {
+      kiadasGomb = '<button type="button" data-muvelet="vissza" title="Az eszköz visszavétele" data-id="' + id + '">Visszavétel</button>';
+    } else if (e.allapot === "elerheto") {
+      kiadasGomb = '<button type="button" data-muvelet="kiad" title="Az eszköz kiadása" data-id="' + id + '">Kiadás</button>';
+    }
+
+    html += '<tr class="' + (lejart ? "lejart" : "") + '">';
+    html += '<td data-cimke="Azonosító">' + id + "</td>";
+    html += '<td data-cimke="Név">' + biztonsagos(e.nev) + "</td>";
+    html += '<td data-cimke="Kategória">' + biztonsagos(e.kategoria) + "</td>";
+    html += '<td data-cimke="Állapot"><span class="jelzo ' + e.allapot + '">' + ALLAPOT_NEVEK[e.allapot] + "</span></td>";
+    html += '<td data-cimke="Kinél van">' + (e.kinel === "" ? "-" : biztonsagos(e.kinel)) + "</td>";
+    html += '<td data-cimke="Határidő">' + hatarido + "</td>";
+    html += '<td class="muveletek">' + kiadasGomb;
+    html += '<button type="button" class="masodlagos" data-muvelet="elozmeny" title="Korábbi kiadások megtekintése" data-id="' + id + '">Előzmények</button>';
+    html += '<button type="button" class="masodlagos" data-muvelet="szerkeszt" title="Az eszköz adatainak szerkesztése" data-id="' + id + '">Szerkesztés</button>';
+    html += '<button type="button" class="veszelyes" data-muvelet="torol" title="Az eszköz törlése" data-id="' + id + '">Törlés</button>';
+    html += "</td></tr>";
+  }
+
+  elem("tablaTest").innerHTML = html;
+  elem("uresUzenet").hidden = lista.length > 0;
+}
+
