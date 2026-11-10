@@ -96,3 +96,11 @@ input, select {
 .statisztika strong { display: block; font-size: 1.8rem; }
 .statisztika span { color: var(--halvany); }
 
+/* Szűrők */
+.szuro {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
