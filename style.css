@@ -104,3 +104,17 @@ input, select {
   margin-bottom: 16px;
 }
 
+/* Táblázat */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--felulet);
+  border: 1px solid var(--vonal);
+}
+
+th, td { padding: 10px 12px; text-align: left; overflow-wrap: anywhere; border-bottom: 1px solid var(--vonal); }
+th { background: var(--hatter); font-size: 0.9rem; }
+td.muveletek button { padding: 4px 10px; font-size: 0.85rem; margin: 0 4px 4px 0; }
+
+.ures { text-align: center; color: var(--halvany); padding: 24px; }
+
