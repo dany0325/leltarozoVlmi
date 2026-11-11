@@ -320,3 +320,51 @@ function elozmenyAblak(azonosito) {
   elem("elozmenyAblak").showModal();
 }
 
+// ---------- Indítás ----------
+function tablaKattintas(esemeny) {
+  var gomb = esemeny.target.closest("button");
+  if (!gomb) return;
+
+  var muvelet = gomb.getAttribute("data-muvelet");
+  var id = gomb.getAttribute("data-id");
+
+  if (muvelet === "kiad") kiadasAblak(id);
+  if (muvelet === "vissza") visszavetel(id);
+  if (muvelet === "elozmeny") elozmenyAblak(id);
+  if (muvelet === "szerkeszt") szerkesztesAblak(id);
+  if (muvelet === "torol") torles(id);
+}
+
+function bezarasKattintas(esemeny) {
+  var ablakId = esemeny.target.getAttribute("data-bezar");
+  if (ablakId) elem(ablakId).close();
+}
+
+function hatterKattintas(esemeny) {
+  var ablak = esemeny.target;
+  if (ablak.tagName !== "DIALOG") return;
+
+  var doboz = ablak.getBoundingClientRect();
+  var kivul = esemeny.clientX < doboz.left || esemeny.clientX > doboz.right ||
+              esemeny.clientY < doboz.top || esemeny.clientY > doboz.bottom;
+  if (kivul) ablak.close();
+}
+
+function inditas() {
+  betoltes();
+
+  elem("ujGomb").addEventListener("click", ujEszkozAblak);
+  elem("eszkozUrlap").addEventListener("submit", eszkozMentese);
+  elem("kiadasUrlap").addEventListener("submit", kiadasRogzitese);
+  elem("tablaTest").addEventListener("click", tablaKattintas);
+  document.addEventListener("click", bezarasKattintas);
+  document.addEventListener("mousedown", hatterKattintas);
+
+  elem("kereses").addEventListener("input", tablaRajzolas);
+  elem("kategoriaSzuro").addEventListener("change", tablaRajzolas);
+  elem("allapotSzuro").addEventListener("change", tablaRajzolas);
+
+  mindentFrissit();
+}
+
+inditas();
