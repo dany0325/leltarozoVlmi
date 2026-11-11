@@ -240,3 +240,15 @@ function eszkozMentese(esemeny) {
   mindentFrissit();
 }
 
+function torles(azonosito) {
+  if (confirm("Biztosan törlöd ezt az eszközt: " + azonosito + "?")) {
+    var uj = [];
+    for (var i = 0; i < eszkozok.length; i++) {
+      if (eszkozok[i].azonosito !== azonosito) uj.push(eszkozok[i]);
+    }
+    eszkozok = uj;
+    mentes();
+    mindentFrissit();
+  }
+}
+
