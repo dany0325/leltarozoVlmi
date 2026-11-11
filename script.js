@@ -252,3 +252,46 @@ function torles(azonosito) {
   }
 }
 
+// ---------- Kiadás és visszavétel ----------
+function kiadasAblak(azonosito) {
+  kiadandoId = azonosito;
+  elem("kiadasCim").textContent = "Kiadás: " + azonosito;
+  elem("kiadasUrlap").reset();
+  elem("hataridoMezo").min = ma();
+  elem("kiadasHiba").textContent = "";
+  elem("kiadasAblak").showModal();
+}
+
+function kiadasRogzitese(esemeny) {
+  esemeny.preventDefault();
+
+  var kinek = elem("kinekMezo").value.trim();
+  var hatarido = elem("hataridoMezo").value;
+
+  if (kinek === "" || hatarido === "") {
+    elem("kiadasHiba").textContent = "Add meg, ki viszi el, és mikorra hozza vissza.";
+    return;
+  }
+  if (hatarido < ma()) {
+    elem("kiadasHiba").textContent = "A határidő nem lehet a múltban.";
+    return;
+  }
+
+  var e = eszkozKeresese(kiadandoId);
+  e.allapot = "kiadva";
+  e.kinel = kinek;
+  e.hatarido = hatarido;
+  e.elozmenyek.push({ kinek: kinek, kiadas: ma(), vissza: "" });
+
+  mentes();
+  elem("kiadasAblak").close();
+  mindentFrissit();
+}
+
+function lezarElozmeny(e) {
+  var utolso = e.elozmenyek[e.elozmenyek.length - 1];
+  if (utolso && utolso.vissza === "") {
+    utolso.vissza = ma();
+  }
+}
+
