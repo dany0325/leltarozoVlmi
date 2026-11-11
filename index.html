@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Eszközleltár</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="fejlec">
+    <div>
+      <h1>Eszközleltár</h1>
+      <p>Iskolai eszközök nyilvántartása: mi hol van, és ki vitte el?</p>
+    </div>
+    <div class="fejlec-gombok">
+      <button type="button" id="ujGomb">Új eszköz</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="statisztika" id="statisztika" aria-label="Statisztika"></section>
+
+    <section class="szuro" aria-label="Keresés és szűrés">
+      <input type="search" id="kereses" placeholder="Keresés névre, azonosítóra vagy névre, akinél van">
+      <select id="kategoriaSzuro" aria-label="Kategória"></select>
+      <select id="allapotSzuro" aria-label="Állapot">
+        <option value="">Minden állapot</option>
+        <option value="elerheto">Elérhető</option>
+        <option value="kiadva">Kiadva (kinél van)</option>
+        <option value="lejart">Lejárt kölcsönzés</option>
+        <option value="hibas">Hibás</option>
+      </select>
+    </section>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Azonosító</th>
+          <th>Név</th>
+          <th>Kategória</th>
+          <th>Állapot</th>
+          <th>Kinél van</th>
+          <th>Határidő</th>
+          <th>Műveletek</th>
+        </tr>
+      </thead>
+      <tbody id="tablaTest"></tbody>
+    </table>
+    <p id="uresUzenet" class="ures" hidden>Nincs találat. Szélesítsd a szűrést, vagy vegyél fel új eszközt.</p>
+  </main>
+
+  <!-- Hozzáadás / szerkesztés -->
+  <dialog id="eszkozAblak">
+    <form id="eszkozUrlap" novalidate>
+      <h2 id="eszkozCim">Új eszköz</h2>
+      <label>Azonosító
+        <input type="text" id="azonositoMezo" placeholder="pl. LAP-001">
+      </label>
+      <label>Név
+        <input type="text" id="nevMezo" placeholder="pl. Dell laptop">
+      </label>
+      <label>Kategória
+        <input type="text" id="kategoriaMezo" list="kategoriaLista" placeholder="pl. Laptop">
+        <datalist id="kategoriaLista"></datalist>
+      </label>
+      <label>Állapot
+        <select id="allapotMezo">
+          <option value="elerheto">Elérhető</option>
+          <option value="kiadva">Kiadva</option>
+          <option value="hibas">Hibás</option>
+        </select>
+      </label>
+      <p class="hiba" id="eszkozHiba" role="alert"></p>
+      <div class="ablak-gombok">
+        <button type="button" class="masodlagos" data-bezar="eszkozAblak">Mégse</button>
+        <button type="submit">Mentés</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Kiadás -->
+  <dialog id="kiadasAblak">
+    <form id="kiadasUrlap" novalidate>
+      <h2 id="kiadasCim">Eszköz kiadása</h2>
+      <label>Ki viszi el?
+        <input type="text" id="kinekMezo" placeholder="pl. Kovács Anna">
+      </label>
+      <label>Visszahozási határidő
+        <input type="date" id="hataridoMezo">
+      </label>
+      <p class="hiba" id="kiadasHiba" role="alert"></p>
+      <div class="ablak-gombok">
+        <button type="button" class="masodlagos" data-bezar="kiadasAblak">Mégse</button>
+        <button type="submit">Kiadás rögzítése</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Előzmények -->
+  <dialog id="elozmenyAblak">
+    <h2 id="elozmenyCim">Kiadási előzmények</h2>
+    <ul id="elozmenyLista"></ul>
+    <div class="ablak-gombok">
+      <button type="button" class="masodlagos" data-bezar="elozmenyAblak">Bezárás</button>
+    </div>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
