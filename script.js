@@ -295,3 +295,28 @@ function lezarElozmeny(e) {
   }
 }
 
+function visszavetel(azonosito) {
+  var e = eszkozKeresese(azonosito);
+  lezarElozmeny(e);
+  e.allapot = "elerheto";
+  e.kinel = "";
+  e.hatarido = "";
+  mentes();
+  mindentFrissit();
+}
+
+function elozmenyAblak(azonosito) {
+  var e = eszkozKeresese(azonosito);
+  var html = "";
+  for (var i = e.elozmenyek.length - 1; i >= 0; i--) {
+    var sor = e.elozmenyek[i];
+    var vissza = sor.vissza === "" ? "még nincs visszahozva" : "visszahozva: " + sor.vissza;
+    html += "<li>" + biztonsagos(sor.kinek) + " - kiadva: " + sor.kiadas + ", " + vissza + "</li>";
+  }
+  if (html === "") html = "<li>Ez az eszköz még nem volt kiadva.</li>";
+
+  elem("elozmenyCim").textContent = "Előzmények: " + azonosito;
+  elem("elozmenyLista").innerHTML = html;
+  elem("elozmenyAblak").showModal();
+}
+
